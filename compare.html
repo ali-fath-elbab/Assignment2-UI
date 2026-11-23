@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Laptop Finder - Compare</title>
+  <link rel="stylesheet" href="dist/output.css" />
+  <script>
+    try {
+      var savedTheme = JSON.parse(localStorage.getItem("laptopFinder.theme"));
+      document.documentElement.classList.add(
+        savedTheme === "performance" ? "theme-performance" : "theme-battery"
+      );
+    } catch (error) {
+      document.documentElement.classList.add("theme-battery");
+    }
+  </script>
+</head>
+<body class="min-h-screen">
+  <div id="site-header"></div>
+
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <span class="badge"><span class="h-1.5 w-1.5 rounded-full bg-app-accent"></span>Decision helper</span>
+    <h1 class="mt-3 text-3xl font-black tracking-tight sm:text-4xl">Compare laptops</h1>
+    <p class="mt-2 max-w-2xl text-sm text-app-muted">Tick two to four of your favorites. The best value in each row is highlighted automatically.</p>
+
+    <section class="panel mt-7" aria-labelledby="picker-heading">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-app-border pb-4">
+        <h2 id="picker-heading" class="flex items-center gap-2 text-base font-black"><span class="icon-chip h-8 w-8"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg></span>Choose from your favorites</h2>
+        <p id="compare-count" class="rounded-lg bg-app-accent-soft px-3 py-1.5 text-sm font-black text-app-accent">0 of 4 selected</p>
+      </div>
+      <p id="compare-message" class="mt-3 text-sm font-bold text-app-accent" role="status"></p>
+      <div id="compare-picker" class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"></div>
+    </section>
+
+    <section class="mt-9" aria-labelledby="table-heading">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 id="table-heading" class="text-lg font-black">Side-by-side comparison</h2>
+          <p class="mt-1 text-xs text-app-muted">Scroll sideways on small screens to see every laptop.</p>
+        </div>
+        <p class="inline-flex items-center gap-2 text-xs font-bold text-app-muted">
+          <span class="h-3.5 w-3.5 rounded border border-app-border bg-app-best"></span>Best value in a row
+        </p>
+      </div>
+      <div id="compare-table" class="mt-4"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script type="module" src="src/js/comparePage.js"></script>
+</body>
+</html>

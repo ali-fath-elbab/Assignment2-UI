@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Laptop Finder - Details</title>
+  <link rel="stylesheet" href="dist/output.css" />
+  <script>
+    try {
+      var savedTheme = JSON.parse(localStorage.getItem("laptopFinder.theme"));
+      document.documentElement.classList.add(
+        savedTheme === "performance" ? "theme-performance" : "theme-battery"
+      );
+    } catch (error) {
+      document.documentElement.classList.add("theme-battery");
+    }
+  </script>
+</head>
+<body class="min-h-screen">
+  <div id="site-header"></div>
+
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <a href="laptops.html" class="inline-flex items-center gap-2 rounded-lg text-sm font-bold text-app-accent transition hover:underline focus:outline-none focus:ring-2 focus:ring-app-accent">
+      <span aria-hidden="true">&larr;</span> Back to catalogue
+    </a>
+    <div id="details-content" class="mt-6"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script type="module" src="src/js/details.js"></script>
+</body>
+</html>

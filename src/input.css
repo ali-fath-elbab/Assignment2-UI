@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+/* Tailwind scans HTML and the JS template literals for the class names we use. */
+@source "../";
+
+/*
+  Battery Saver Mode is the default theme. These design tokens become
+  Tailwind utilities such as bg-app-surface, text-app-text and border-app-border.
+*/
+@theme {
+  --color-app-bg: #f1f8f4;
+  --color-app-surface: #ffffff;
+  --color-app-surface-2: #eaf6ee;
+  --color-app-text: #0f2a1d;
+  --color-app-muted: #4a6355;
+  --color-app-border: #d3e8d9;
+  --color-app-accent: #15803d;
+  --color-app-accent-hover: #166534;
+  --color-app-accent-soft: #dcfce7;
+  --color-app-on-accent: #ffffff;
+  --color-app-best: #fef9c3;
+  --color-app-best-text: #713f12;
+}
+
+/* Re-stating the default values makes the two themes easy to compare side by side. */
+.theme-battery {
+  --color-app-bg: #f1f8f4;
+  --color-app-surface: #ffffff;
+  --color-app-surface-2: #eaf6ee;
+  --color-app-text: #0f2a1d;
+  --color-app-muted: #4a6355;
+  --color-app-border: #d3e8d9;
+  --color-app-accent: #15803d;
+  --color-app-accent-hover: #166534;
+  --color-app-accent-soft: #dcfce7;
+  --color-app-on-accent: #ffffff;
+  --color-app-best: #fef9c3;
+  --color-app-best-text: #713f12;
+}
+
+/* Performance Mode overrides the same tokens, so every utility updates at once. */
+.theme-performance {
+  --color-app-bg: #0a0f1c;
+  --color-app-surface: #141d2e;
+  --color-app-surface-2: #1c2940;
+  --color-app-text: #f8fafc;
+  --color-app-muted: #a7b6cc;
+  --color-app-border: #2a3a54;
+  --color-app-accent: #fb923c;
+  --color-app-accent-hover: #fdba74;
+  --color-app-accent-soft: #3a2415;
+  --color-app-on-accent: #2a1206;
+  --color-app-best: #7c2d12;
+  --color-app-best-text: #ffedd5;
+}
+
+@layer base {
+  /* transition-colors makes switching between the two themes feel smooth. */
+  body {
+    @apply bg-app-bg text-app-text antialiased transition-colors duration-300;
+  }
+
+  ::selection {
+    @apply bg-app-accent-soft text-app-accent;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-app-border bg-app-surface p-5 shadow-sm shadow-app-text/5 transition-colors duration-300;
+  }
+
+  .laptop-card {
+    @apply flex flex-col rounded-2xl border border-app-border bg-app-surface p-4 shadow-sm shadow-app-text/5 transition duration-200 hover:-translate-y-1 hover:border-app-accent hover:shadow-xl hover:shadow-app-accent/10 focus-within:ring-2 focus-within:ring-app-accent;
+  }
+
+  .btn-action {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-app-accent px-4 py-2.5 text-sm font-bold text-app-on-accent shadow-sm shadow-app-accent/20 transition duration-200 hover:bg-app-accent-hover hover:shadow-md hover:shadow-app-accent/30 focus:outline-none focus:ring-2 focus:ring-app-accent focus:ring-offset-2 focus:ring-offset-app-bg active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-app-border bg-app-surface px-4 py-2.5 text-sm font-bold text-app-text transition duration-200 hover:border-app-accent hover:text-app-accent hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-app-accent active:scale-95;
+  }
+
+  .field {
+    @apply w-full rounded-xl border-app-border bg-app-surface py-2.5 text-sm text-app-text shadow-sm shadow-app-text/5 transition duration-200 placeholder:text-app-muted/70 hover:border-app-accent/60 focus:border-app-accent focus:ring-app-accent;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-app-accent-soft px-2.5 py-1 text-xs font-bold capitalize text-app-accent;
+  }
+
+  /* Defined after .badge so the translucent version wins over the solid one. */
+  .badge-glass {
+    @apply border border-app-border/70 bg-app-surface/90 text-app-accent shadow-sm backdrop-blur;
+  }
+
+  /* Reused by the home statistics, favorites totals and detail quick specs. */
+  .stat-card {
+    @apply rounded-2xl border border-app-border bg-app-surface p-4 shadow-sm shadow-app-text/5 transition duration-200 hover:-translate-y-0.5 hover:border-app-accent/60 hover:shadow-md;
+  }
+
+  .icon-chip {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-app-accent-soft text-app-accent;
+  }
+
+  .section-label {
+    @apply mb-2 block text-xs font-extrabold uppercase tracking-widest text-app-muted;
+  }
+
+  .empty-state {
+    @apply col-span-full flex flex-col items-center rounded-2xl border border-app-border bg-app-surface px-6 py-12 text-center shadow-sm shadow-app-text/5 transition-colors duration-300;
+  }
+}
